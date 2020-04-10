@@ -1,0 +1,195 @@
+{% extends 'attraction/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    #attraction-img{
+        height: 170px;
+        object-fit: cover;
+    },
+    
+</style>
+<!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Destinations</h3>
+                        <br>
+                        <div class="col-md-6">
+                        <div class="input-group">
+                            <form method='GET' action="">
+                                <input type="text" class="form-control" name='q' placeholder="Search" value='{{ request.GET.q }}'/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger " type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+
+    
+    <!-- where_togo_area_start  -->
+       
+                   
+
+            
+
+    
+    <!-- where_togo_area_end  -->
+
+
+    
+      <nav aria-label="breadcrumb">
+        <div class="container">
+                            <form method='GET' action="">
+                            <input class="single_select" type='text' name='q' placeholder='search' value='{{ request.GET.q }}'/>
+                            <button type='submit'>Search<button>
+                            </form>
+                    </div>
+
+      </nav>
+    
+
+
+             
+
+
+
+ 
+
+
+    <div class="popular_places_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="filter_result_wrap">
+                        <h3>Filter Result</h3>
+                        <div class="filter_bordered">
+                            <div class="filter_inner">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="single_select">
+                                            <select>
+                                                <option data-display="Country">Country</option>
+                                                <option value="1">Africa</option>
+                                                <option value="2">canada</option>
+                                                <option value="4">USA</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_select">
+                                            <select>
+                                                <option data-display="Travel type">Travel type</option>
+                                                <option value="1">advance</option>
+                                                <option value="2">advance</option>
+                                                <option value="4">premium</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="range_slider_wrap">
+                                            <span class="range">Prise range</span>
+                                            <div id="slider-range"></div>
+                                            <p>
+                                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-weight:400;">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reset_btn">
+                                <button class="boxed-btn4" type="submit">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                    {% for place in page_obj %}
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single_place">
+                                <div class="thumb">
+                                    <img id="attraction-img" src="{{ place.img }}" alt="">
+                                    <a href="#" class="prise">$500</a>
+                                </div>
+                                <div class="place_info">
+                                    <a href="{{ place.get_absolute_url }}"><h3>{{ place.name }}</h3></a>
+                                    <p>{{ place.province }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}    
+                    </div>
+                </div>
+            </div>
+
+
+
+
+<!---pagination-->
+            <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="first">
+                            <i class="ti-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Previous">
+                            <i class="ti-angle-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="current page-item active">
+                                <a href="#" class="page-link">{{ num }}</a>
+                            </li>
+
+
+                        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                            <li class="page-item ">
+                                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="pagination-number page-link">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Next">
+                            <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Last">
+                            <i class="ti-angle-double-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+<!---pagination-->
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'attraction/base.html' %}
+
+{% block content %}
+
+
+<h1>{{ detail.name }}</h1>
+<p>{{ detail.detail }}<p>
+
+
+<a href='{{ detail.get_edit_url }}'>Edit</a>
+<a href='{{ detail.get_delete_url }}'>Delete</a>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'attraction/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_4">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>NEWS</h3>
+                        <p>ข่าวสารประชาสัมพันธ์การท่องเที่ยวในประเทศไทย</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+
+<!--================NEWS Area =================-->
+    <div class="blog_area section-padding" id="newspage">
+        <div class="container" >
+        
+            <div class="row">
+            {% for news in page_obj %}
+                    <div class="col-lg-4 col-md-12">
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="{{ news.img.url }}" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="{{ news.get_absolute_url }}">
+                                    <h2>{{ news.title }}</h2>
+                                </a>
+                                <p>{{ news.detail|truncatewords:10 }}</p>
+                            </div>
+                        </article>
+                    </div>
+            {% endfor %}
+            </div><!--row-->
+        
+
+            <!---pagination-->
+            <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="first">
+                            <i class="ti-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Previous">
+                            <i class="ti-angle-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="current page-item active">
+                                <a href="#" class="page-link">{{ num }}</a>
+                            </li>
+
+
+                        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                            <li class="page-item ">
+                                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="pagination-number page-link">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Next">
+                            <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q}}{% endif %}" class="page-link" aria-label="Last">
+                            <i class="ti-angle-double-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <!---pagination-->
+
+        </div><!--container-->
+    </div>
+    <!--================NEWS Area =================-->
+
+{% endblock %}
