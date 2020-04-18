@@ -1,4 +1,5 @@
 {% extends 'attraction/base.html' %}
+
 {% load static %}
 
 
@@ -15,20 +16,22 @@
                 </div>
                 <div class="col-md-3 col-sm-12">
                   <div class="more_place_btn text-center">
-                    <a class="boxed-btn4" href="/plan/new"><i class="fa fa-phone"></i>  สร้างแผน</a>
+                    <a class="boxed-btn4" href="/plan/new"><span><i class="fa fa-plus"></i></span>  สร้างแผน</a>
+                  
                   </div>
                 </div>
               </div>
+
               {% for plan in allPlan %}
               <div class="card p-4 mt-3 mb-3 mb-md-1 aos-init aos-animate" data-aos="fade-up">
                 <div class="row align-items-sm-center">
                   <div class="col-md-5">
-                    <div class="media-body">
-                      <a class="md-0" href="{{ plan.get_absolute_url }}"><h3>{{ plan.name }}</h3></a>
+                    <div class="blog_area">
+                      <a class="md-0" href="{{ plan.id }}"><h4><strong>{{ plan.name }}</strong></h4></a>
                     </div>
                   </div>
                   <div class="col-sm-7 col-md-3">
-                    <span class="font-size-1">{{ plan.detail|truncatewords:10 }}</span>
+                    <p><span class="font-size-1">{{ plan.detail|truncatewords:10 }}</span></p>
                   </div>
                   <div class="col-md-3 text-lg-right">
                     <a class="btn btn-outline-info border transition-3d-hover" href="{{ plan.id }}/edit">Edit</a>
@@ -36,29 +39,44 @@
                   </div>
                 </div>
               </div>
+            
+            {% empty %}
+            <div class="travel_variation_area" style="padding-top: 50px">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-xl-12">
+                          <div class="single_travel text-center">
+                              <div class="icon">
+                                  <img src=" {% static 'img/svg_icon/calendar (1).svg' %}" alt="">
+                              </div>
+                              <h3>คุณยังไม่มีแผนการท่องเที่ยว</h3>
+                              <p>--- คลิกสร้าง เพื่อสร้างแผนการท่องเที่ยวของคุณ ---</p>
+                          </div>
+                          <div class="more_place_btn text-center">
+                              <a class="boxed-btn4" href="/plan/new">สร้างแผน</a>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
             </div>
-          {% empty %}
-          <div class="travel_variation_area" style="padding-top: 50px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single_travel text-center">
-                            <div class="icon">
-                                <img src=" {% static 'img/svg_icon/calendar (1).svg' %}" alt="">
-                            </div>
-                            <h3>คุณยังไม่มีแผนการท่องเที่ยว</h3>
-                            <p>--- คลิกสร้าง เพื่อสร้างแผนการท่องเที่ยวของคุณ ---</p>
-                        </div>
-                        <div class="more_place_btn text-center">
-                            <a class="boxed-btn4" href="/plan/new">สร้างแผน</a>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
-          
         </div> 
     </div>
+
+
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+
+
 {% endblock content %}
+
+
+
+

@@ -6,6 +6,8 @@ from django.db.models import Q
 from .forms import CreatePlanForm
 from .models import News, Plan, TouristAttraction, Rating
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 
@@ -87,12 +89,37 @@ def plan_list_view(request):
 @login_required
 def plan_detail_view(request, plan_id):
     detail = get_object_or_404(Plan, id=plan_id)
-    return render(request, 'attraction/plan_detail.html', context={'detail': detail})
+    attractions_list = TouristAttraction.objects.all()
+    plan = Plan.objects.get(pk=plan_id)
+    attractions = plan.touristattractions.all()
+    
+    query = request.GET.get('q')
+    if query:
+        attractions_list = attractions_list.filter(
+            Q(name__icontains=query)|
+            Q(province__icontains=query)|
+            Q(address__icontains=query)|
+            Q(kindOf__icontains=query)).distinct()
+    
+    paginator = Paginator(attractions_list, 5) # Show 21 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+
+        'page_obj': page_obj,
+        'plan': plan,
+        'attractions': attractions,
+        'detail': detail,
+    }
+    
+    return render(request, 'attraction/plan_detail.html', context)
 
 
 
 @login_required
 def plan_create_view(request):
+    title = "Create"
     form = CreatePlanForm(request.POST or None)
 
     if form.is_valid():
@@ -103,8 +130,11 @@ def plan_create_view(request):
         return redirect('/plan')
     context = {
         'form': form,
+        'title': title,
     }
     return render(request, 'attraction/plan_create.html', context)
+
+
 
 @login_required
 def plan_update_view(request, plan_id):
@@ -113,7 +143,9 @@ def plan_update_view(request, plan_id):
     if form.is_valid():
         form.save()
         return redirect('/plan')
-    context = {"form": form,}
+    context = {
+        'form': form,
+        }
     return render(request, 'attraction/plan_update.html', context)
 
 @login_required
@@ -125,3 +157,10 @@ def plan_delete_view(request, plan_id):
     success_message = 'Success: Book was deleted.'
     context = {"object": obj}
     return render(request, 'attraction/plan_delete.html', context)
+
+
+
+
+
+def map_view(request):
+    return render(request, 'attraction/map.html')

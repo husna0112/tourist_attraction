@@ -283,18 +283,19 @@ class Plan(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
     detail = models.TextField(null=True, blank=True)
-    
-    # touristattraction = models.ManyToManyField(TouristAttraction)
+    touristattractions = models.ManyToManyField(TouristAttraction)
 
     def __str__(self):
         return self.name
 
+  
 
-    def get_absolute_url(self):
-        return f"/plan/%i/" % self.id
 
-    def get_edit_url(self):
-        return f"{self.get_absolute_url}/edit"
+    def get_plan_url(self):
+        return reverse('plan_detail', args=[str(self.id)])
 
-    def get_delete_url(self):
-        return f"{self.get_absolute_url}/delete"
+    # def get_edit_url(self):
+    #     return f"{self.get_plan_url}/update"
+
+    # def get_delete_url(self):
+    #     return f"{self.get_absolute_url}/delete"

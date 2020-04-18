@@ -5,13 +5,13 @@
 
 <div class="row justify-content-center ">
     <div class="col-md-6 p-5 contact-form">
-        <h1>Update plan</h1>
+        <h1>แก้ไขแผนการท่องเที่ยว</h1>
         <hr/>
         <form method="POST" action="" enctype='multipart/form-data' >
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" class="btn btn-danger  btn-block" value="{{ title }}" />
-        <p style="text-align:right; padding-top:10px;">{{ end }} <a href="{% url 'login' %}" class="ml-2">{{ click_end }}</a></p>
+        <input type="submit" class="btn btn-danger  btn-block" value="แก้ไข" />
+        
         </form>
     </div>
 </div>
