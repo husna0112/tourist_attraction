@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html class="no-js" lang="zxx">
 
 <head>
@@ -10,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=K2D:300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Sarabun:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
@@ -33,19 +32,19 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 
-<style>
-.dropdown-submenu {
-  position: relative;
-}
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+    </style>
 
-.dropdown-submenu .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
-</style>    
 
-   
 </head>
 
 <body>
@@ -60,57 +59,42 @@
                 <div class="container-fluid">
                     <div class="header_bottom_border">
                         <div class="row align-items-center">
-                            <div class="col-xl-2 col-lg-2">
+                            <div class="col-xl-6 col-lg-6">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="img/logo.png" alt="">
+                                    <a href="/">
+                                        <strong style="color:#FF4A52;">หน้าหลัก</strong>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6">
-                                <div class="main-menu  d-none d-lg-block">
+                                <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="index.html">home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a class="" href="travel_destination.html">Destination</a></l/li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                        <li><a href="destination_details.html">Destinations details</a></li>
-                                                        <li><a href="elements.html">elements</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">single-blog</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a class="active" href="/attraction">สถานที่ท่องเที่ยว</a></li>
+                                            <li><a class="" href="#">Destination</a></l/li>
+                                                <li><a href="#">Visualization <i class="ti-angle-down"></i></a>
+                                                    <ul class="submenu">
+                                                        <li><a href="destination_details.html">ระดับประเทศ</a></li>
+                                                        <li><a href="elements.html">ระดับจังหวัด</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="/news">ข่าวสาร</a></li>
+                                                <li><a href="/login"><i class="fa fa-sign-in"></i>LOGIN</a></li>
+
                                         </ul>
+
                                     </nav>
                                 </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
-                                <div class="social_wrap d-flex align-items-center justify-content-end">
-                                    <div class="number">
-                                        <p> <i class="fa fa-phone"></i> 10(256)-928 256</p>
-                                    </div>
-                                    <div class="social_links d-none d-xl-block">
-                                        <ul>
-                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="seach_icon">
                                 <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </div>
+
+
+
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
@@ -125,24 +109,11 @@
 
 
 
-    <!-- Modal -->
- <form method='GET' action=''>   
-  <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="serch_form">
-            <input type="text" name='q' placeholder="Search" value='{{ request.GET.q }}'>
-            <button type="submit">search</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
 
 
 
-{% block content %}
-{% endblock %}
+
+    {% block content %} {% endblock %}
 
 
     <footer class="footer">
@@ -153,7 +124,7 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="img/footer_logo.png" alt="">
+                                    <img src="{%  static 'img/footer_logo.png' %}" alt="">
                                 </a>
                             </div>
                             <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
@@ -227,19 +198,19 @@
                             <h3 class="footer_title">
                                 Instagram
                             </h3>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </footer>
 
 
-    
+
     <!-- link that opens popup -->
-<!--     
+    <!--     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
 
@@ -266,18 +237,10 @@
     <script src="{% static 'js/slick.min.js' %}"></script>
     <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 
-<script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script>
-   
 
-    
+
+
+
     <!--contact js-->
     <script src="{% static 'js/contact.js' %}"></script>
     <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
@@ -285,9 +248,19 @@ $(document).ready(function(){
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
 
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+        });
+    </script>
 
 
- 
+
+
 
 
 </body>

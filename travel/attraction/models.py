@@ -247,23 +247,7 @@ class Rating(models.Model):
         index_together = (('user', 'touristattraction'),)
 
 
-class News(models.Model):
-    title = models.CharField(max_length=200)
-    detail = models.TextField(null=True, blank=True)
-    img = models.ImageField(upload_to='news', null=True, blank=True,
-                            width_field="width_field", height_field="height_field")
-    height_field = models.IntegerField(default=100)
-    width_field = models.IntegerField(default=100)
-    touristattraction = models.ForeignKey(TouristAttraction, on_delete=models.CASCADE, null=True, blank=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True)
-   
 
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('news_detail', args=[str(self.id)])
 
 class Rank(models.Model):
     rank_number = models.IntegerField()
@@ -278,24 +262,3 @@ class Rank(models.Model):
 
     def __str__(self):
         return self.rank_type
-
-class Plan(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=200)
-    detail = models.TextField(null=True, blank=True)
-    touristattractions = models.ManyToManyField(TouristAttraction)
-
-    def __str__(self):
-        return self.name
-
-  
-
-
-    def get_plan_url(self):
-        return reverse('plan_detail', args=[str(self.id)])
-
-    # def get_edit_url(self):
-    #     return f"{self.get_plan_url}/update"
-
-    # def get_delete_url(self):
-    #     return f"{self.get_absolute_url}/delete"

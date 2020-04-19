@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'attraction',
     'authen',
+    'plan',
+    'news',
     'crispy_forms',
     'sorl.thumbnail',
     'bootstrap_modal_forms',
@@ -61,7 +63,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'attraction/template'),
-                 os.path.join(BASE_DIR, 'authen/template')],
+                 os.path.join(BASE_DIR, 'authen/template'),
+                 os.path.join(BASE_DIR, 'news/template'),
+                 os.path.join(BASE_DIR, 'plan/template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

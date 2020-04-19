@@ -54,16 +54,10 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>Destinations</h3>
-                        <br>
-                        <div class="col-md-6">
-                        <div class="input-group">
-                            <form method='GET' action="">
-                                <input class="search_input" type='text' name='q' placeholder='search' value='{{ request.GET.q }}'/>
-
-                    
-                            </form>
-                        </div>
-                        </div>
+                        <br>   
+                        <form method='GET' action="">
+                            <input class="search_input" type='text' name='q' placeholder='search' value='{{ request.GET.q }}'/>
+                        </form>   
                     </div>
                 </div>
             </div>
@@ -108,7 +102,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="filter_result_wrap">
-                        <h3>Filter Result</h3>
+                        <h4>Filter Result</h4>
                         <div class="filter_bordered">
                             <div class="filter_inner">
                                 <div class="row">
@@ -132,6 +126,8 @@
                                               </select>
                                         </div>
                                     </div>
+                                    
+						
                                     
                                 </div>
                             </div>

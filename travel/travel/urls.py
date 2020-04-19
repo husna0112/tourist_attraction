@@ -22,8 +22,10 @@ from attraction.views import Home
 urlpatterns = [
     path('', Home, name='home'),
     path('admin/', admin.site.urls),
-    path('', include('attraction.urls')),
+    path('attraction/', include('attraction.urls')),
     path('', include('authen.urls')),
+    path('plan/', include('plan.urls')),
+    path('news/', include('news.urls')),
     
 
     
